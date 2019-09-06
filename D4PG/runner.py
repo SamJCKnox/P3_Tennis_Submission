@@ -4,16 +4,13 @@
 import os
 import ptan
 import time
-import pybullet_envs
 import argparse
-from tensorboardX import SummaryWriter
-import numpy as np
 
-from lib import model, common
+import numpy as np
 
 import torch
 import torch.optim as optim
-import torch.nn.functional as F
+
 
 
 ## Original imports
@@ -24,21 +21,18 @@ import torch
 import numpy as np
 from collections import deque
 
-#import importlib
-#import ddpg_agent
-#importlib.reload(ddpg_agent)
-#from ddpg_agent import Agent
 
 def ddpg_runner(args):
-
     env = args['environment']
     brain_name = args['brain_name']
-    scores = []
-    agent = ddpg_agent.Agent(args['agent_args'])
-    achievement = args['achievement']
-    achievement_length = args['achievement_length']
-    scores_deque = deque(maxlen=achievement_length)
 
+    agent = args['agent']
+    memory = args['memory']
+    device = args['device']
+
+    achievement = args['achievement']
+    scores_deque = deque(maxlen=args['achievement_length'])
+    scores = []
 
     for i_episode in range(1, args['episodes']+1):
         env_info = env.reset(train_mode=True)[brain_name]     # reset the environment
@@ -58,9 +52,9 @@ def ddpg_runner(args):
 
         scores_deque.append(score)
         scores.append(score)
-        print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)),end="")
+        print('\rEpisode {}\tScore: {:.2f}\tAverage Score: {:.2f}'.format(i_episode, score, np.mean(scores_deque)),end="")
         if i_episode % 100 == 0:
-            print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)))
+            print('\rEpisode {}\tScore: {:.2f}\tAverage Score: {:.2f}'.format(i_episode, score, np.mean(scores_deque)))
 
         torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
         torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
