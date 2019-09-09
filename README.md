@@ -2,7 +2,7 @@
 The aim of this task was to solve the tennis environment using multiple agent reinforcement learning methods.
 
 ## The Environment
-The environment has a state space of 8, including positions and velocities of the ball and racket, and an action space of 2 continuous action, including moving forward and backward, and up and down. The environment is considered solved when the average score is greater than 0.5 for 100 episodes.
+The environment has a state space of 8, including positions and velocities of the ball and racket. The environment returns a stack of 3 states, hence the input of the networks are of size 24. The action space is 2 continuous action, including moving forward and backward, and up and down. The environment is considered solved when the average score is greater than 0.5 for 100 episodes, however, this is still no where near optimal play, so in the notebook, the average score is set to 1 for 100 episodes.
 
 
 ## Getting Started
@@ -32,4 +32,6 @@ The `P3_Tennis_Submission` notebook is the header which calls all scripts requir
 The networks trained in the current outputs of the Jupyter Notebook are in `BenchmarkNetworks`, copy these into the root directory to view in the evaluation section.
 
 `Report.md` shows the architecture of the networks with the hyperparamteres.
+
+The directory `D4PG` is the attempt at using D4PG with multiple branches with different structures and implementations, discussed fuyrther in `Report.md`.
 

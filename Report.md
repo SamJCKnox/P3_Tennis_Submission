@@ -5,7 +5,7 @@ This method also has a critic which is a value based method, which judges the ou
 
 
 ## Modifications
-The only code that actually worked was the DDPG code from project 2. I made modifications to a D4PG script and tried to implement prioritized experience replay (PER) however, this slowed the script by over 300%. The PER script was found in ptan, a useful pytorch library, however still ran too slowly and didn't find increase learning. These attempts are all found in `D4PG'.
+The only code that actually worked was the DDPG code from project 2. I made modifications to a D4PG script and tried to implement prioritized experience replay (PER) however, this slowed the script by over 300%. The PER script was found in ptan, a useful pytorch library, however still ran too slowly and didn't find increase learning. These attempts are all found in `D4PG`.
 
 ### Hyperparameters
 Network parameters apply to both actor and critic networks:
